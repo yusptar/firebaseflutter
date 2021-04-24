@@ -7,6 +7,7 @@ final GoogleSignIn googleSignIn = GoogleSignIn();
 String name;
 String email;
 String imageUrl;
+
 Future<String> signInWithGoogle() async {
   await Firebase.initializeApp();
   final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
@@ -37,6 +38,36 @@ Future<String> signInWithGoogle() async {
     assert(user.uid == currentUser.uid);
     print('signInWithGoogle succeeded: $user');
     return '$user';
+  }
+  return null;
+}
+
+Future<String> signInWithEmail(String emailmu, String passwordmu) async {
+  await Firebase.initializeApp();
+  try {
+    UserCredential userCredential = await FirebaseAuth.instance
+        .signInWithEmailAndPassword(email: emailmu, password: passwordmu);
+
+    final User user = userCredential.user;
+    if (user != null) {
+      assert(user.email != null);
+      email = user.email;
+      assert(!user.isAnonymous);
+      assert(await user.getIdToken() != null);
+      final User currentUser = _auth.currentUser;
+      assert(user.uid == currentUser.uid);
+      print('signInWithGoogle succeeded: $user');
+      return '$user';
+    }
+  } on FirebaseAuthException catch (e) {
+    if (e.code == 'user-not-found') {
+      await FirebaseAuth.instance
+          .createUserWithEmailAndPassword(email: emailmu, password: passwordmu);
+      return await signInWithEmail(emailmu, passwordmu);
+    } else if (e.code == 'wrong-password') {
+      print('Wrong password provided for that user.');
+      return null;
+    }
   }
   return null;
 }
