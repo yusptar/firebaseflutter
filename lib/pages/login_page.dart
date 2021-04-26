@@ -1,7 +1,7 @@
-import 'package:firebaseflutter/second_screen.dart';
+import 'package:firebaseflutter/pages/second_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:firebaseflutter/sign_in.dart';
-import 'package:firebaseflutter/first_screen.dart';
+import 'package:firebaseflutter/service/sign_in.dart';
+import 'package:firebaseflutter/pages/first_screen.dart';
 
 class LoginPage extends StatefulWidget {
   @override
