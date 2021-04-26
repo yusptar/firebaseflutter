@@ -1,3 +1,4 @@
+import 'package:firebaseflutter/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebaseflutter/sign_in.dart';
 import 'package:firebaseflutter/first_screen.dart';
@@ -64,7 +65,7 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.of(context).push(
                       MaterialPageRoute(
                         builder: (context) {
-                          return FirstScreen();
+                          return SecondScreen();
                         },
                       ),
                     );
