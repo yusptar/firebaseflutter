@@ -23,77 +23,80 @@ class _LoginPageState extends State<LoginPage> {
             children: <Widget>[
               FlutterLogo(size: 150),
               SizedBox(height: 50),
-              Container(
-                margin: EdgeInsets.all(10),
-                width: 350,
-                child: Column(
-                  children: [
-                    TextField(
-                      controller: emailController,
-                      decoration: InputDecoration(
-                        hintText: 'Email Address',
-                        icon: Icon(Icons.email),
-                      ),
-                    ),
-                    TextField(
-                      obscureText: true,
-                      controller: passwordController,
-                      decoration: InputDecoration(
-                        hintText: 'Password',
-                        icon: Icon(Icons.input),
-                      ),
-                    ),
-                    Container(
-                      margin: EdgeInsets.all(20),
-                      child: OutlineButton(
-                        splashColor: Colors.grey,
-                        onPressed: () {
-                          signInWithEmail(
-                                  emailController.text, passwordController.text)
-                              .then((result) {
-                            if (result != null) {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                  builder: (context) {
-                                    return FirstScreen();
-                                  },
-                                ),
-                              );
-                            }
-                          });
+              _signInEmail(),
+              _signInButton(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _signInEmail() {
+    return Container(
+      margin: EdgeInsets.all(10),
+      width: 350,
+      child: Column(
+        children: [
+          TextFormField(
+            controller: emailController,
+            decoration: InputDecoration(
+              hintText: 'Email Address',
+              icon: Icon(Icons.email),
+            ),
+          ),
+          TextFormField(
+            obscureText: true,
+            controller: passwordController,
+            decoration: InputDecoration(
+              hintText: 'Password',
+              icon: Icon(Icons.input),
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.all(20),
+            child: OutlineButton(
+              splashColor: Colors.grey,
+              onPressed: () {
+                signInWithEmail(emailController.text, passwordController.text)
+                    .then((result) {
+                  if (result != null) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) {
+                          return FirstScreen();
                         },
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40)),
-                        highlightElevation: 0,
-                        borderSide: BorderSide(color: Colors.grey),
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Padding(
-                                padding: const EdgeInsets.only(left: 10),
-                                child: Text(
-                                  'Log in ',
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    color: Colors.blue,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
+                      ),
+                    );
+                  }
+                });
+              },
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(40)),
+              highlightElevation: 0,
+              borderSide: BorderSide(color: Colors.grey),
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10),
+                      child: Text(
+                        'Log in ',
+                        style: TextStyle(
+                          fontSize: 20,
+                          color: Colors.blue,
                         ),
                       ),
                     )
                   ],
                 ),
               ),
-              _signInButton(),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

@@ -48,7 +48,7 @@ Future<String> signInWithEmail(String emailmu, String passwordmu) async {
     UserCredential userCredential = await FirebaseAuth.instance
         .signInWithEmailAndPassword(email: emailmu, password: passwordmu);
 
-    final User user = userCredential.user;
+    User user = userCredential.user;
     if (user != null) {
       assert(user.email != null);
       email = user.email;

@@ -50,7 +50,7 @@ class FirstScreen extends StatelessWidget {
                     color: Colors.black54),
               ),
               Text(
-                email ?? email.split('@')[0],
+                email /*?? email.split('@')[0]*/,
                 style: TextStyle(
                     fontSize: 25,
                     color: Colors.deepPurple,
