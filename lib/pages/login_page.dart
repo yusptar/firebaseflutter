@@ -1,3 +1,4 @@
+import 'package:firebaseflutter/pages/register_page.dart';
 import 'package:firebaseflutter/pages/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebaseflutter/service/sign_in.dart';
@@ -23,9 +24,15 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               FlutterLogo(size: 150),
-              SizedBox(height: 50),
+              SizedBox(height: 10),
+              Text(
+                'Login Form',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              SizedBox(height: 28),
               _signInEmail(),
               _signInButton(),
+              _registerButton(),
             ],
           ),
         ),
@@ -35,8 +42,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget _signInEmail() {
     return Container(
-      margin: EdgeInsets.all(10),
-      width: 350,
+      width: 330,
       child: Column(
         children: [
           TextFormField(
@@ -144,6 +150,19 @@ class _LoginPageState extends State<LoginPage> {
           ],
         ),
       ),
+    );
+  }
+
+  Widget _registerButton() {
+    return FlatButton(
+      child: Text(
+        "Don't have an account? Register here",
+        style: TextStyle(color: Colors.black54),
+      ),
+      onPressed: () async {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => RegisterPage()));
+      },
     );
   }
 }
